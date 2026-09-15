@@ -1,0 +1,495 @@
+/* =====================================================================
+   TELA DO OPERADOR — layout adaptativo. Antes travava a altura em
+   100vh sem rolagem (achava que sempre cabia tudo numa tela só) — em
+   monitores com resolução vertical menor isso cortava painéis
+   inteiros de vista, sem dar nenhum jeito de ver o resto. Agora o
+   layout ocupa a tela toda quando cabe, e passa a rolar sozinho
+   (página inteira) quando não cabe — nunca corta nada, só rola.
+===================================================================== */
+
+body.pagina-sem-scroll {
+  min-height: 100vh;
+  overflow-y: auto;
+}
+
+/* ---------------- Alarme de motivo não informado — fundo pulsando ---------------- */
+/* pulsa a cor de fundo da PÁGINA (não um overlay por cima de tudo) — os
+   cards/painéis, que têm fundo sólido próprio, ficam intocados; só as
+   áreas de fundo/gaps entre eles pulsam pra um vinho escuro e voltam */
+
+body.alarme-motivo-indefinido {
+  animation: ega-fundo-alarme 1.1s ease-in-out infinite;
+}
+
+@keyframes ega-fundo-alarme {
+  0%, 18% { background-color: var(--bg-app); }
+  55%, 68% { background-color: #4d1620; }
+  100% { background-color: var(--bg-app); }
+}
+
+.main-sem-scroll {
+  min-height: calc(100vh - 70px);
+  height: auto;
+  padding: 16px 28px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  overflow: visible;
+}
+
+#conteudo {
+  flex: 1;
+  min-height: 0;
+}
+
+.machine-layout {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 14px;
+  align-items: start;
+}
+
+.machine-col-main {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-width: 0;
+}
+
+.machine-col-paradas {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-width: 0;
+}
+
+.paradas-panel {
+  display: flex;
+  flex-direction: column;
+}
+
+/* painéis mais compactos nesta tela específica */
+.machine-layout .panel {
+  padding: 14px 16px;
+}
+
+/* ---------------- Cabeçalho ---------------- */
+
+.machine-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.machine-header-status {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+}
+
+/* pequeno quadrado discreto com o OEE calculado hoje, ao lado do
+   status RODANDO/PARADA/SETUP */
+.oee-badge-mini {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 42px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  background: var(--bg-surface-2);
+}
+
+.oee-badge-mini-label {
+  font-family: var(--font-mono);
+  font-size: 8.5px;
+  letter-spacing: 1px;
+  color: var(--text-muted);
+}
+
+.oee-badge-mini-valor {
+  font-family: var(--font-display);
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--text-primary);
+}
+
+.oee-badge-mini.oee-bom {
+  border-color: var(--status-run);
+  background: var(--status-run-soft);
+}
+.oee-badge-mini.oee-bom .oee-badge-mini-valor { color: var(--status-run); }
+
+.oee-badge-mini.oee-atencao {
+  border-color: var(--status-setup);
+  background: var(--status-setup-soft);
+}
+.oee-badge-mini.oee-atencao .oee-badge-mini-valor { color: var(--status-setup); }
+
+.oee-badge-mini.oee-critico {
+  border-color: var(--status-stop);
+  background: var(--status-stop-soft);
+}
+.oee-badge-mini.oee-critico .oee-badge-mini-valor { color: var(--status-stop); }
+
+.oee-badge-mini.oee-sem-dado {
+  opacity: .55;
+}
+
+.machine-header h2 {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.machine-header .op-label {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 1.4px;
+  color: var(--text-muted);
+  margin-top: 6px;
+}
+
+.machine-header .op-numero {
+  font-family: var(--font-display);
+  font-size: 30px;
+  font-weight: 700;
+  color: var(--accent);
+  line-height: 1.1;
+}
+
+.machine-header .op-item {
+  display: inline-block;
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-top: 10px;
+  line-height: 1.25;
+  padding: 6px 14px;
+  background: var(--accent-soft);
+  border-left: 3px solid var(--accent);
+  border-radius: var(--radius-sm);
+}
+
+/* ---------------- Progresso ---------------- */
+
+.progress-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  color: var(--text-secondary);
+  margin-bottom: 6px;
+}
+
+.progress-pct {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.progress-numeros {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.progress-produzido {
+  font-family: var(--font-display);
+  font-size: 30px;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1;
+}
+
+.progress-sep {
+  font-size: 18px;
+  color: var(--text-muted);
+}
+
+.progress-meta {
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.progress-bar-bg {
+  height: 12px;
+  background: var(--bg-surface-2);
+  border-radius: 999px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent), var(--accent-hover));
+  border-radius: 999px;
+  transition: width .3s ease;
+}
+
+/* ---------------- Alerta de parada ---------------- */
+
+.alert-box {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  background: var(--status-stop-soft);
+  border: 1px solid rgba(240,71,63,.35);
+  border-radius: var(--radius-lg);
+  padding: 12px 16px;
+}
+
+.alert-box.alert-box-alarme {
+  background: var(--status-stop);
+  border-color: var(--status-stop);
+}
+
+.alert-box.alert-box-alarme .alert-title,
+.alert-box.alert-box-alarme .alert-reason,
+.alert-box.alert-box-alarme .alert-time {
+  color: #fff;
+}
+
+.alert-title {
+  font-weight: 600;
+  color: var(--status-stop);
+  margin-bottom: 2px;
+  font-size: 13px;
+}
+
+.alert-reason {
+  color: var(--text-primary);
+  font-size: 12.5px;
+}
+
+.alert-time {
+  color: var(--text-secondary);
+  font-size: 11.5px;
+  margin-top: 2px;
+  font-family: var(--font-mono);
+}
+
+/* ---------------- Info: operador / sincronia ---------------- */
+
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 12px;
+}
+
+.info-box {
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 12px 16px;
+}
+
+.info-label {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  letter-spacing: 1.2px;
+  color: var(--text-muted);
+  margin-bottom: 4px;
+}
+
+.info-value {
+  font-family: var(--font-display);
+  font-size: 17px;
+  font-weight: 600;
+}
+
+.info-unit {
+  font-size: 11px;
+  color: var(--text-secondary);
+  margin-left: 4px;
+}
+
+/* ---------------- Paradas de hoje — cards com espaçamento ---------------- */
+
+.machine-col-paradas .panel-header {
+  margin-bottom: 8px;
+}
+
+.paradas-lista {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: 360px;
+  overflow-y: auto;
+}
+
+.parada-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  background: var(--bg-surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+}
+
+.parada-nome {
+  font-family: var(--font-body);
+  font-size: 12.5px;
+  color: var(--text-secondary);
+}
+
+.parada-duracao {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--status-stop);
+  white-space: nowrap;
+}
+
+/* ---------------- Cards de produção por hora ---------------- */
+
+.horas-panel {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.horas-legenda {
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-bottom: 10px;
+}
+
+.horas-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(64px, 1fr));
+  gap: 8px;
+  overflow-y: auto;
+  min-height: 0;
+}
+
+.hora-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  padding: 10px 6px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+  background: var(--bg-surface);
+}
+
+.hora-numero {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.hora-valor {
+  font-family: var(--font-display);
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.hora-card.hora-bom {
+  border-color: var(--status-run);
+  background: var(--status-run-soft);
+}
+.hora-card.hora-bom .hora-valor { color: var(--status-run); }
+
+.hora-card.hora-atencao {
+  border-color: var(--status-setup);
+  background: var(--status-setup-soft);
+}
+.hora-card.hora-atencao .hora-valor { color: var(--status-setup); }
+
+.hora-card.hora-critico {
+  border-color: var(--status-stop);
+  background: var(--status-stop-soft);
+}
+.hora-card.hora-critico .hora-valor { color: var(--status-stop); }
+
+.hora-card.hora-sem-dado {
+  opacity: .5;
+}
+.hora-card.hora-sem-dado .hora-valor { color: var(--text-muted); }
+
+/* ---------------- Ritmo — peças/min necessário vs atual ---------------- */
+
+.ritmo-panel {
+  flex: none;
+}
+
+.ritmo-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.ritmo-box {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 12px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+  background: var(--bg-surface-2);
+}
+
+.ritmo-label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 1px;
+  color: var(--text-muted);
+}
+
+.ritmo-valor {
+  font-family: var(--font-display);
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1.15;
+}
+
+.ritmo-sub {
+  font-family: var(--font-body);
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.ritmo-box.ritmo-bom {
+  border-color: var(--status-run);
+  background: var(--status-run-soft);
+}
+.ritmo-box.ritmo-bom .ritmo-valor { color: var(--status-run); }
+
+.ritmo-box.ritmo-atencao {
+  border-color: var(--status-setup);
+  background: var(--status-setup-soft);
+}
+.ritmo-box.ritmo-atencao .ritmo-valor { color: var(--status-setup); }
+
+.ritmo-box.ritmo-critico {
+  border-color: var(--status-stop);
+  background: var(--status-stop-soft);
+}
+.ritmo-box.ritmo-critico .ritmo-valor { color: var(--status-stop); }
+
+.ritmo-box.ritmo-sem-dado {
+  opacity: .6;
+}
+
+@media (max-width: 900px) {
+  .machine-layout {
+    grid-template-columns: 1fr;
+  }
+}
