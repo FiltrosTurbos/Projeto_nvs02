@@ -1,0 +1,394 @@
+/* ---------------- Importação das planilhas ---------------- */
+
+/* ---------------- Filtro de linhas ---------------- */
+
+.pcp-filtro-linhas-linha {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+.pcp-filtro-linhas-label {
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  color: var(--text-muted);
+}
+
+.pcp-filtro-linha-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: var(--text-secondary);
+  cursor: pointer;
+}
+
+.pcp-filtro-linha-item input {
+  accent-color: var(--accent);
+  cursor: pointer;
+}
+
+.pcp-filtro-btn-pequeno {
+  padding: 5px 12px;
+  font-size: 11.5px;
+}
+
+.pcp-import-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+@media (max-width: 800px) {
+  .pcp-import-grid { grid-template-columns: 1fr; }
+}
+
+.pcp-upload {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 16px;
+  border: 1px dashed var(--border);
+  border-radius: var(--radius-md);
+  background: var(--bg-surface-2);
+}
+
+.pcp-upload.pcp-upload-ok {
+  border-style: solid;
+  border-color: var(--status-run);
+}
+
+.pcp-upload-label {
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--text-primary);
+}
+
+.pcp-upload-desc {
+  font-size: 11.5px;
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+
+.pcp-upload-btn {
+  align-self: flex-start;
+  margin-top: 4px;
+}
+
+.pcp-upload-status {
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  color: var(--text-secondary);
+}
+
+.pcp-upload-ok .pcp-upload-status {
+  color: var(--status-run);
+}
+
+.pcp-input-data {
+  align-self: flex-start;
+  margin-top: 4px;
+  background: var(--bg-surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 8px 10px;
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-size: 13px;
+}
+
+.pcp-input-data:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.pcp-import-acoes {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-top: 18px;
+}
+
+.btn-primario {
+  background: var(--accent);
+  color: var(--accent-ink);
+  border-color: var(--accent);
+}
+
+.btn-primario:disabled {
+  opacity: .45;
+  cursor: not-allowed;
+}
+
+.btn-primario:hover:not(:disabled) {
+  filter: brightness(1.08);
+}
+
+.pcp-import-aviso {
+  font-size: 12px;
+  color: var(--status-stop);
+}
+
+/* ---------------- Resultado: uma linha por painel ---------------- */
+
+.pcp-resultado {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.pcp-resumo-geral {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 18px;
+}
+
+.pcp-resumo-geral-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.pcp-resumo-geral-valor {
+  font-family: var(--font-display);
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.pcp-resumo-geral-label {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: .4px;
+  color: var(--text-muted);
+}
+
+.pcp-resumo-geral-alerta .pcp-resumo-geral-valor {
+  color: var(--status-stop);
+}
+
+.pcp-linha-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.pcp-linha-grupo {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.pcp-linha-grupo-titulo {
+  font-size: 13px;
+  font-weight: 700;
+  font-family: var(--font-mono);
+  letter-spacing: .6px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+
+.pcp-etapa-tag {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: .4px;
+  padding: 3px 10px;
+  border-radius: 999px;
+}
+
+.pcp-etapa-plissadeira {
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+
+.pcp-etapa-dosadora {
+  background: var(--status-setup-soft);
+  color: var(--status-setup);
+}
+
+.pcp-linha-titulo {
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.pcp-linha-resumo {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.pcp-pos {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  color: var(--text-muted);
+}
+
+tr.pcp-atual td {
+  background: var(--status-run-soft);
+}
+
+tr.pcp-atual .pcp-pos {
+  color: var(--status-run);
+}
+
+.pcp-meta-resumo {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  font-weight: 400;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--text-muted);
+  margin-left: 8px;
+}
+
+.pcp-tag {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: .5px;
+  padding: 2px 7px;
+  border-radius: 999px;
+  background: var(--status-run-soft);
+  color: var(--status-run);
+  margin-left: 6px;
+}
+
+.pcp-tag-manual {
+  background: var(--status-setup-soft);
+  color: var(--status-setup);
+}
+
+.pcp-mover-col {
+  white-space: nowrap;
+}
+
+.pcp-btn-mover {
+  background: var(--bg-surface-2);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  width: 20px;
+  height: 16px;
+  line-height: 1;
+  font-size: 9px;
+  color: var(--text-secondary);
+  cursor: pointer;
+  padding: 0;
+  margin-right: 2px;
+}
+
+.pcp-btn-mover:hover:not(:disabled) {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.pcp-btn-mover:disabled {
+  opacity: .25;
+  cursor: default;
+}
+
+.pcp-grupo-marcador {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 2px;
+  margin-right: 6px;
+  vertical-align: middle;
+  background: var(--border-strong);
+}
+
+.pcp-item-sem-catalogo {
+  color: var(--status-stop);
+}
+
+.pcp-item-sem-catalogo .pcp-tag-erro {
+  background: var(--status-stop-soft);
+  color: var(--status-stop);
+}
+
+/* ---------------- Impressão ---------------- */
+
+/* caixinha de checklist do operador — só existe no papel */
+.pcp-check-impressao,
+.pcp-check-titulo,
+.pcp-folha-titulo {
+  display: none;
+}
+
+@media print {
+  .topbar,
+  .page-title p,
+  .pcp-import,
+  #btn-imprimir,
+  #pcp-filtro-linhas-secao,
+  .pcp-resumo-geral,
+  .pcp-meta-resumo,
+  .pcp-btn-mover,
+  .pcp-data-alvo,
+  .pcp-linha-grupo-titulo,
+  .pcp-nao-imprime {
+    display: none !important;
+  }
+
+  /* uma máquina por folha: título próprio + quebra de página antes
+     de cada uma (menos a primeira, pra não sair folha em branco) */
+  .pcp-folha-titulo {
+    display: block;
+    font-size: 20px;
+    font-weight: 700;
+    color: #000;
+    margin-bottom: 14px;
+  }
+
+  .pcp-maquina-folha {
+    break-before: page;
+    page-break-before: always;
+  }
+
+  .pcp-maquina-folha.pcp-folha-primeira {
+    break-before: auto;
+    page-break-before: auto;
+  }
+
+  /* no papel, as setas de reordenar viram um checklist pro operador */
+  .pcp-check-titulo {
+    display: inline;
+  }
+
+  .pcp-check-impressao {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    border: 1.5px solid #000;
+    border-radius: 3px;
+    vertical-align: middle;
+  }
+
+  body {
+    background: #fff;
+    color: #000;
+  }
+
+  .panel {
+    box-shadow: none;
+    border: 1px solid #ccc;
+    break-inside: avoid;
+  }
+
+  table.data-table th,
+  table.data-table td {
+    color: #000;
+    border-bottom: 1px solid #ccc;
+  }
+
+  tr.pcp-atual td {
+    background: #eee !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+}

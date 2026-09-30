@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Detalhe da Máquina · Painel de Produção</title>
+
+  <link rel="stylesheet" href="../shared/theme.css">
+  <link rel="stylesheet" href="minha_maquina.css">
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="../shared/auth.js"></script>
+  <script src="../shared/supabaseClient.js"></script>
+</head>
+<body class="pagina-sem-scroll">
+
+  <header class="topbar">
+    <div class="brand">
+      <img src="../shared/img/logo-notria.png" alt="Notria">
+      <div>
+        <h1>Painel de Produção</h1>
+        <span>DETALHE DA MÁQUINA</span>
+      </div>
+    </div>
+
+    <nav class="nav-menu">
+      <a class="menu-btn" href="../gestor/gestor.html" data-visivel-para="gestor,admin">Dashboard</a>
+      <a class="menu-btn active" href="../maquinas/maquinas.html">Máquinas</a>
+      <a class="menu-btn" href="../supervisor/supervisor.html" data-visivel-para="gestor,admin">Supervisor</a>
+      <a class="menu-btn" href="../pcp/pcp.html" data-visivel-para="pcp,admin">Sequenciador</a>
+      <a class="menu-btn" href="../admin/admin.html" data-visivel-para="admin">Admin</a>
+    </nav>
+
+    <div class="topbar-right">
+      <a class="btn" href="../maquinas/maquinas.html">&larr; Voltar</a>
+    </div>
+  </header>
+
+  <main class="main main-sem-scroll">
+
+    <div id="conteudo">
+      <div class="empty-message">Carregando máquina...</div>
+    </div>
+
+  </main>
+
+  <script src="minha_maquina.js"></script>
+</body>
+</html>
