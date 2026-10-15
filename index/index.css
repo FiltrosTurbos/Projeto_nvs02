@@ -1,0 +1,265 @@
+/* =====================================================================
+   TELA DE LOGIN — split-screen industrial
+===================================================================== */
+
+.login-body {
+  min-height: 100vh;
+  overflow-y: auto;
+}
+
+.login-split {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  min-height: 100vh;
+}
+
+/* ---------------- Lado esquerdo: identidade ---------------- */
+
+.login-brand {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 60px;
+  background:
+    radial-gradient(900px 500px at 15% 15%, var(--accent-soft), transparent 60%),
+    linear-gradient(155deg, var(--bg-panel) 0%, var(--bg-app) 65%);
+  border-right: 1px solid var(--border);
+  overflow: hidden;
+}
+
+.login-brand::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.03) 1px, transparent 1px);
+  background-size: 46px 46px;
+  mask-image: linear-gradient(180deg, black, transparent 85%);
+}
+
+.login-brand-inner {
+  position: relative;
+  z-index: 1;
+}
+
+.login-logo {
+  height: 64px;
+  width: auto;
+  filter: drop-shadow(0 4px 14px rgba(0,0,0,.5));
+  margin-bottom: 36px;
+}
+
+.login-heading {
+  font-family: var(--font-display);
+  font-size: 56px;
+  font-weight: 600;
+  line-height: 1.05;
+  color: var(--text-primary);
+  letter-spacing: .2px;
+  border-left: 3px solid var(--accent);
+  padding-left: 22px;
+}
+
+.login-meta {
+  margin-top: 32px;
+  padding-left: 25px;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--text-muted);
+  letter-spacing: .5px;
+}
+
+.login-meta-sep {
+  margin: 0 8px;
+  color: var(--border-strong);
+}
+
+/* ---------------- Lado direito: seleção de acesso ---------------- */
+
+.login-acesso {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 16px;
+  padding: 60px 72px;
+}
+
+.login-pergunta {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 1.4px;
+  color: var(--text-muted);
+  margin-bottom: 6px;
+}
+
+.acesso-opcao {
+  display: block;
+  width: 100%;
+  text-align: left;
+  font: inherit;
+  cursor: pointer;
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--border-strong);
+  border-radius: var(--radius-md);
+  padding: 22px 26px;
+  transition: border-color .16s ease, transform .16s ease, background .16s ease;
+}
+
+.acesso-opcao:hover {
+  border-color: var(--accent);
+  border-left-color: var(--accent);
+  background: var(--bg-surface-hover);
+  transform: translateX(4px);
+}
+
+.acesso-opcao-topo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.acesso-opcao-nome {
+  font-family: var(--font-display);
+  font-size: 21px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.acesso-opcao-seta {
+  color: var(--text-muted);
+  font-size: 18px;
+  transition: transform .16s ease, color .16s ease;
+}
+
+.acesso-opcao:hover .acesso-opcao-seta {
+  color: var(--accent);
+  transform: translateX(4px);
+}
+
+.acesso-opcao-desc {
+  display: block;
+  margin-top: 4px;
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+.acesso-opcao-gestor-aberto {
+  cursor: default;
+}
+
+.acesso-opcao-gestor-aberto:hover {
+  transform: none;
+  border-left-color: var(--accent);
+}
+
+/* ---------------- Campo de senha do Gestor ---------------- */
+
+.senha-area {
+  display: flex;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.senha-area[hidden] {
+  display: none;
+}
+
+.senha-input {
+  flex: 1;
+  min-width: 0;
+  background: var(--bg-app);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 10px 12px;
+  font-family: var(--font-body);
+  font-size: 13px;
+  color: var(--text-primary);
+}
+
+.senha-input:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.senha-btn {
+  padding: 10px 18px;
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+.senha-erro {
+  display: block;
+  margin-top: 10px;
+  font-size: 11.5px;
+  color: var(--status-stop);
+}
+
+.senha-erro[hidden] {
+  display: none;
+}
+
+/* ---------------- Card discreto (Admin) ---------------- */
+/* de propósito: sem caixa, sem descrição, texto pequeno e apagado —
+   só quem já sabe que existe vai reparar */
+
+.acesso-opcao-discreto {
+  margin-top: 28px;
+  padding-top: 10px;
+  cursor: pointer;
+  width: fit-content;
+}
+
+.acesso-opcao-discreto-nome {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-muted);
+  opacity: .5;
+  letter-spacing: .5px;
+  transition: opacity .16s ease;
+}
+
+.acesso-opcao-discreto:hover .acesso-opcao-discreto-nome {
+  opacity: 1;
+}
+
+.senha-area-discreta {
+  width: 220px;
+}
+
+.senha-area-discreta .senha-input,
+.senha-area-discreta .senha-btn {
+  font-size: 11.5px;
+  padding: 7px 10px;
+}
+
+/* ---------------- Responsivo ---------------- */
+
+@media (max-width: 860px) {
+
+  .login-body {
+    height: auto;
+    overflow: auto;
+  }
+
+  .login-split {
+    grid-template-columns: 1fr;
+    height: auto;
+    min-height: 100vh;
+  }
+
+  .login-brand {
+    padding: 40px 32px;
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .login-heading {
+    font-size: 38px;
+  }
+
+  .login-acesso {
+    padding: 32px;
+  }
+}
