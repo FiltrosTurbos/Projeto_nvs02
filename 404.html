@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Painel de Produção — Notria</title>
+  <script>
+    // =================================================================
+    // ENDEREÇO DO PAINEL NA REDE DA FÁBRICA
+    // Se o IP do PC do painel mudar, troque SÓ esta linha.
+    // =================================================================
+    var PAINEL_ENDERECO = "http://192.168.0.113:3000";
+
+    // Leva pra MESMA tela no PC do painel: um link antigo como
+    // .../Projeto_nvs02/gestor/gestor.html abre .../gestor/gestor.html
+    (function () {
+      var partes = location.pathname.split("/").filter(Boolean);
+      // no GitHub Pages o 1º pedaço é o nome do repositório
+      if (/github\.io$/i.test(location.hostname) && partes.length) partes.shift();
+      var resto = partes.join("/");
+      if (resto === "" || resto === "index.html" || resto === "404.html") resto = "";
+      var destino = PAINEL_ENDERECO.replace(/\/$/, "") + "/" + resto + location.search + location.hash;
+      window.__destino = destino;
+      location.replace(destino);
+    })();
+  </script>
+  <style>
+    :root { --fundo: #0b0f17; --cartao: #161d2b; --texto: #e6ebf2; --suave: #8b97a8; --destaque: #19b3a6; }
+    * { box-sizing: border-box; }
+    body { margin: 0; min-height: 100vh; display: grid; place-items: center; padding: 16px;
+           background: var(--fundo); color: var(--texto); font-family: system-ui, "Segoe UI", Arial, sans-serif; }
+    .cartao { max-width: 460px; width: 100%; background: var(--cartao); border-radius: 14px; padding: 28px; text-align: center; }
+    h1 { font-size: 20px; margin: 0 0 8px; }
+    p { color: var(--suave); line-height: 1.5; margin: 0 0 18px; font-size: 15px; }
+    a.botao { display: inline-block; background: var(--destaque); color: #fff; text-decoration: none;
+              padding: 12px 22px; border-radius: 10px; font-weight: 600; }
+    small { display: block; margin-top: 18px; color: var(--suave); font-size: 12px; }
+  </style>
+</head>
+<body>
+  <div class="cartao">
+    <h1>Abrindo o Painel de Produção…</h1>
+    <p>Se a página não abrir em alguns segundos, confira se você está conectado na <strong>rede da fábrica</strong> e clique no botão abaixo.</p>
+    <a class="botao" id="link" href="http://192.168.0.113:3000">Abrir o painel</a>
+    <small>O painel só funciona dentro da rede da fábrica.</small>
+  </div>
+  <script>
+    if (window.__destino) document.getElementById("link").href = window.__destino;
+  </script>
+</body>
+</html>
